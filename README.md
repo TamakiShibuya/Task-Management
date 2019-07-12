@@ -1,4 +1,25 @@
 # Ruby on Rails on Docker
+## Model Diagram
+![モデル図](/images/modelpic.jpg)
+### Model name
+・ユーザー　・タスク
+### カラム名／データ型
+ ＜ユーザーテーブル＞  
+ ・ユーザーID/string  
+ ・ユーザー名/string  
+ ・パスワード/string  
+ ・メールアドレス/string  
+
+ ＜タスクテーブル＞  
+ ・タスクID/string  
+ ・タスク名/string  
+ ・内容/string  
+ ・記入日/date  
+ ・期限/date  
+ ・種類/string  
+ ・優先度/integer  
+ ・進行度integer  
+ ・タスク数/integer  
 
 ## Ruby version
  - [.ruby-version](https://github.com/hihats/ruby-on-rails-pg-on-docker/blob/master/.ruby-version)
