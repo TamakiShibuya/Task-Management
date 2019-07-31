@@ -1,0 +1,1 @@
+Rails.applocation.config.i18n.default_locale = :ja
