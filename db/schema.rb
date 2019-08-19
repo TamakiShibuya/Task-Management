@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 2019_07_17_030931) do
   create_table "tasks", force: :cascade do |t|
     t.string "name"
     t.text "contents"
-    t.date "start"
     t.date "dl"
     t.string "type"
     t.integer "prior"
