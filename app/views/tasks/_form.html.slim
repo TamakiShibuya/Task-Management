@@ -5,4 +5,7 @@
   .form-group
     = f.label :contents
     = f.text_area :contents, rows: 5, class: 'form-control', id: 'task_contents'
+  .form-group
+    = f.label :dl
+    = f.text_field :dl, class: 'form-control', id: 'task_dl'
   = f.submit nil, class: 'btn btn-primary'
