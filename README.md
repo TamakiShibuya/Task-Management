@@ -21,6 +21,30 @@
  ・進行度integer  
  ・タスク数/integer  
 
+## Deploy
+### herokuでデプロイする方法
+
+ - ターミナル上でHerokuコマンドを叩けるようにする
+ ```bash
+ $ brew tap eroku/brew && brew install heroku
+ ```
+ - Herokuにログイン
+ ```bash
+ $ heroku login
+ ```
+ - Herokuアプリケーションを作成
+ ```bash
+ $ heroku create <name>
+ ```
+ - gitを介してHerokuへのデプロイ
+ ```bash
+ $ git push heroku master
+ ```
+ - 本番環境でのマイグレーションをする
+ ```bash
+ $ heroku run rails db:migrate
+ ```
+
 ## Ruby version
  - [.ruby-version](https://github.com/hihats/ruby-on-rails-pg-on-docker/blob/master/.ruby-version)
 
