@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   def index
-    @tasks = current_user.tasks.order(created_at: :desc)
+    @tasks = Task.all
   end
 
   def show
