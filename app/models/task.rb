@@ -1,4 +1,6 @@
 class Task < ApplicationRecord
+  enum priority: {低: 0, 中: 1, 高: 2}
+  enum status: {未着手: 0, 作業中: 1, 完了: 2}
   validates :name, presence: true, length: { maximum: 30 }
   validates :contents, presence: true, length: { maximum: 100 }
   validate :validate_name_not_including_comma

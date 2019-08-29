@@ -4,10 +4,8 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       t.string :name
       t.text :contents
       t.date :dl
-      t.string :type
-      t.integer :prior
-      t.integer :prog
-      t.integer :qty
+      t.integer :priority
+      t.integer :status
 
       t.timestamps
     end

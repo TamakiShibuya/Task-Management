@@ -1,5 +1,15 @@
 ---
 ja:
+  enums:
+    task:
+      priority:
+        low: 低
+        medium: 中
+        high: 高
+      status:
+        todo: 未着手
+        doing: 作業中
+        done: 完了
   activerecord:
     errors:
       messages:
@@ -15,7 +25,9 @@ ja:
         name: タスク名
         contents: 内容
         created_at: 登録日
-        dl: 期限　　　　
+        dl: 期限　
+        priority: 優先度
+        status: ステータス
   date:
     abbr_day_names:
     - 日
