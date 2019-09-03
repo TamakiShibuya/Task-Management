@@ -1,8 +1,28 @@
 class TasksController < ApplicationController
   def index
     @tasks = Task.all
-  end
+    redirect_to root_path if params[:search] == ""
+    split_search = params[:search].split(/[[:blank:]]+/)
+    minus_search = split_search.select {|word| word.match(/^-/) }
+    split_search.reject! {|word| word.match(/^-/) }
+    minus_search.each {|word| word.slice!(/^-/) }
+    @tasks = []
+    split_search.each do |search|
+      next if search == ""
+      @tasks += Task.where('name LIKE(?)', "%#{search}%")
+    end
+    @tasks.uniq!
 
+    minus_tasks = []
+    minus_search.each do |search|
+      next if search == ""
+      minus_tasks += Task.where('name LIKE(?)', "%#{search}%")
+    end
+    minus_tasks.each do |minus_task|
+      @tasks.delete(minus_task)
+    end
+  end
+  
   def show
     @task = Task.find(params[:id])
   end
@@ -32,7 +52,6 @@ class TasksController < ApplicationController
     task.destroy
     redirect_to tasks_url, notice: "タスク「#{task.name}」を削除しました。"
   end
-
   private
 
   def task_params
