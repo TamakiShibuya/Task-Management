@@ -25,7 +25,7 @@ ja:
         name: タスク名
         contents: 内容
         created_at: 登録日
-        dl: 期限　
+        deadline: 期限　
         priority: 優先度
         status: ステータス
   date:
