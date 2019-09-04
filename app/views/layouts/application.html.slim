@@ -12,7 +12,7 @@ html
       .navbar-brand Task Management
       .app-title.navbar.nabar-expand-md.navbar-light.bg-light
         = form_tag tasks_path, :method => 'get' do
-          = text_field_tag :search, params[:search]
+          = text_field_tag :keyword, params[:keyword]
           = submit_tag "検索"
     .container
       - if flash.notice.present?

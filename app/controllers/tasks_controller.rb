@@ -1,28 +1,31 @@
 class TasksController < ApplicationController
   def index
     @tasks = Task.all
-    redirect_to root_path if params[:search] == ""
-    split_search = params[:search].split(/[[:blank:]]+/)
-    minus_search = split_search.select {|word| word.match(/^-/) }
-    split_search.reject! {|word| word.match(/^-/) }
-    minus_search.each {|word| word.slice!(/^-/) }
+  end
+
+  def self keyword
+    redirect_to root_path if params[:keyword] == ""
+    split_keyword = params[:keyword].split(/[[:blank:]]+/), nil ? # => true
+    minus_keyword = split_search.select {|word| word.match(/^-/) }
+    split_keyword.reject!　{|word| word.match(/^-/)}
+    minus_keyword.each　{|word| word.slice!(/^-/)}
     @tasks = []
-    split_search.each do |search|
-      next if search == ""
-      @tasks += Task.where('name LIKE(?)', "%#{search}%")
+    split_keyword.each do |keyword|
+      next if keyword == ""
+      @tasks += Task.where('name LIKE(?)', "%#{keyword}%")
     end
     @tasks.uniq!
 
     minus_tasks = []
-    minus_search.each do |search|
-      next if search == ""
-      minus_tasks += Task.where('name LIKE(?)', "%#{search}%")
+    minus_keyword.each do |keyword|
+      next if keyword == ""
+      minus_tasks += Task.where('name LIKE(?)', "%#{keyword}%")
     end
     minus_tasks.each do |minus_task|
       @tasks.delete(minus_task)
     end
   end
-  
+
   def show
     @task = Task.find(params[:id])
   end
