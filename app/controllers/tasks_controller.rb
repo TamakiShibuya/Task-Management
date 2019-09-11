@@ -1,29 +1,7 @@
 class TasksController < ApplicationController
   def index
     @tasks = Task.all
-  end
-
-  def self keyword
-    redirect_to root_path if params[:keyword] == ""
-    split_keyword = params[:keyword].split(/[[:blank:]]+/), nil ? # => true
-    minus_keyword = split_search.select {|word| word.match(/^-/) }
-    split_keyword.reject!　{|word| word.match(/^-/)}
-    minus_keyword.each　{|word| word.slice!(/^-/)}
-    @tasks = []
-    split_keyword.each do |keyword|
-      next if keyword == ""
-      @tasks += Task.where('name LIKE(?)', "%#{keyword}%")
-    end
-    @tasks.uniq!
-
-    minus_tasks = []
-    minus_keyword.each do |keyword|
-      next if keyword == ""
-      minus_tasks += Task.where('name LIKE(?)', "%#{keyword}%")
-    end
-    minus_tasks.each do |minus_task|
-      @tasks.delete(minus_task)
-    end
+    @tasks = @tasks.where('name LIKE ?', "%#{params[:search]}%") if params[:search].present?
   end
 
   def show
@@ -58,6 +36,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :contents, :created_at, :deadline)
+    params.require(:task).permit(:name, :contents, :created_at, :deadline, :search)
   end
 end

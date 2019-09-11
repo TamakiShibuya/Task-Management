@@ -3,6 +3,10 @@
    - task.errors.full_messages.each do |message|
      li= message
 
+= form_with url: tasks_path, method: :get, local: true do |form|
+    = form.text_field :search
+    = form.submit '検索', name: nil
+
 = form_with model: task, local: true do |f|
   .form-group
     = f.label :name
