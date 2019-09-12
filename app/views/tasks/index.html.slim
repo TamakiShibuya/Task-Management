@@ -8,6 +8,7 @@ table.table.table-hover
     tr
       th= Task.human_attribute_name(:name)
       th= Task.human_attribute_name(:created_at)
+      th= Task.human_attribute_name(:deadline)
       th= Task.human_attribute_name(:priority)
       th= Task.human_attribute_name(:status)
       th
@@ -16,6 +17,7 @@ table.table.table-hover
       tr
         td= link_to task.name, task_path(task)
         td= task.created_at
+        td= task.deadline
         td= task.priority
         td= task.status
         td

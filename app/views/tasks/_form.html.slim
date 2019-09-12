@@ -16,4 +16,6 @@
   .form-group
     = f.label :status
     = f.select :status, options_for_select(Task.statuses_i18n.keys.map {|k| [Task.statuses_i18n[k], k]}), class: 'form-control'
+    = f.label :deadline
+    = f.date_select :deadline, id: 'task_deadline'
   = f.submit nil, class: 'btn btn-primary'
