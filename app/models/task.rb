@@ -6,11 +6,13 @@ class Task < ApplicationRecord
   validates :contents, presence: true, length: { maximum: 100 }
   validate :validate_name_not_including_comma
 
-  def self.search(search)
-    if search
-      Task.where(['name LIKE ?', "%#{search}%"])
-    else
-      Task.all
+  def self.search(search,status)
+    if search.present? && status.present?
+      Task.where(['tasks.name LIKE ?', "%#{search}%"]).where(status: status)
+    elsif search.blank?
+      Task.where(status: status)
+    elsif status.blank?
+      Task.where(['tasks.name LIKE ?', "%#{search}%"])
     end
   end
 

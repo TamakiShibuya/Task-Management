@@ -1,7 +1,9 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all
-    @tasks = @tasks.where('name LIKE ?', "%#{params[:search]}%") if params[:search].present?
+    @tasks = Task.all.search(params[:search], [:status])
+    if params[:search].present? || params[:status].present?
+      @tasks = Task.search(params[:name], params[:status]).order(created_at: :desc)
+    end
   end
 
   def show
