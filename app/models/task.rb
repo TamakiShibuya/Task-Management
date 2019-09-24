@@ -8,9 +8,9 @@ class Task < ApplicationRecord
 
   def self.search(search,status)
     if search.present? && status.present?
-      Task.where(['tasks.name LIKE ?', "%#{search}%"]).where(status: status)
+      Task.where(['tasks.name LIKE ?', "%#{search}%"]).where(status: Task.statuses)
     elsif search.blank?
-      Task.where(status: status)
+      Task.where(status: Task.statuses)
     elsif status.blank?
       Task.where(['tasks.name LIKE ?', "%#{search}%"])
     end
