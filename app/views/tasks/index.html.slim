@@ -7,8 +7,8 @@ table.table.table-hover
   thead.thead-default
     tr
       th= Task.human_attribute_name(:name)
-      th= Task.human_attribute_name(:deadline)
-      th= Task.human_attribute_name(:priority)
+      th== Task.human_attribute_name(:deadline) + link_to(" ▼",tasks_path(sort_column: "deadline", sort_direction: "desc")) + link_to("▲", tasks_path(sort_column: "deadline", sort_direction: "asc"))
+      th== Task.human_attribute_name(:priority) + link_to(" ▼",tasks_path(sort_column: "priority", sort_direction: "desc")) + link_to("▲", tasks_path(sort_column: "priority", sort_direction: "asc"))
       th= Task.human_attribute_name(:status)
       th
   tbody

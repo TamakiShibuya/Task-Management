@@ -1,6 +1,11 @@
 class TasksController < ApplicationController
   def index
     @tasks = Task.all
+    if params[:sort_column].present? && params[:sort_direction].present?
+      @tasks = Task.order(params[:sort_column] + ' ' + params[:sort_direction])
+    else
+      @tasks = Task.order(created_at: :desc)
+    end
   end
 
   def show
