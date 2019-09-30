@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all.search(params[:search], [:status])
+    @tasks = Task.search(params[:search], [:status])
     if params[:search].present? || params[:status].present?
       @tasks = Task.search(params[:search], params[:status]).order(created_at: :desc)
     end
