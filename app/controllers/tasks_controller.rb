@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  helper_method :sort_column, :sort_direction
   def index
     @tasks = Task.all
     if params[:sort_column].present? && params[:sort_direction].present?
@@ -39,6 +40,14 @@ class TasksController < ApplicationController
   end
 
   private
+  def sort_direction
+      %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+    end
+
+  def sort_column
+        Task.column_deadline.include?(params[:sort]) ? params[:sort] : "deadline"
+        Task.column_deadline.include?(params[:sort]) ? params[:sort] : "priority"
+  end
 
   def task_params
     params.require(:task).permit(:name, :contents, :deadline, :priority, :status)
