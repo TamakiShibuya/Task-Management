@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :login_reqired
+  # skip_before_action :login_reqired
   def new
   end
 
@@ -8,20 +8,20 @@ class SessionsController < ApplicationController
 
     if users&.authenticate(session_params[:password])
       session[:user_id] = user.user_id
-      redirectt_to root_url, notice: 'ログインしました'
+      redirect_to root_url, notice: 'ログインしました'
     else
       render :new
     end
   end
 
-  def destoroy
+  def destroy
     reset_session
     redirect_to root_url, notice: 'ログアウトしました'
   end
 
   private
 
-  def sessiion_params
+  def session_params
     params.require(:session).permit(:email, :password)
   end
 end
