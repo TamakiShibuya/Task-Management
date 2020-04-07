@@ -23,12 +23,8 @@ ActiveRecord::Schema.define(version: 2020_04_03_054643) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-<<<<<<< HEAD
-    t.integer "user_id"
-=======
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_tasks_on_user_id"
->>>>>>> 8dfe3c8... 乱雑なmigrationファイルの整理(個人開発時に限る対応)
   end
 
   create_table "users", force: :cascade do |t|
@@ -37,10 +33,8 @@ ActiveRecord::Schema.define(version: 2020_04_03_054643) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
-<<<<<<< HEAD
-=======
+
     t.index ["email"], name: "index_users_on_email", unique: true
->>>>>>> 8dfe3c8... 乱雑なmigrationファイルの整理(個人開発時に限る対応)
   end
 
 end
