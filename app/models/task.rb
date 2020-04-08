@@ -6,6 +6,8 @@ class Task < ApplicationRecord
   validates :contents, presence: true, length: { maximum: 100 }
   validate :validate_name_not_including_comma
 
+  belongs_to :user
+
   private
 
   def validate_name_not_including_comma
