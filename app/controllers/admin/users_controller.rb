@@ -5,6 +5,7 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @tasks = User.eager_load(:user)
   end
 
   def new
@@ -42,7 +43,10 @@ class Admin::UsersController < ApplicationController
   end
 
   private
-
+  def revive_active_record(arr)
+    arr.first.class.where(id: arr.map(&:id))
+  end
+  
   def user_params
     params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation)
   end
