@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   def index
-    @users = User.eager_load(:tasks).to_a
+    @users = User.eager_load(:tasks).count
   end
 
   def show
@@ -46,12 +46,12 @@ class Admin::UsersController < ApplicationController
   def revive_active_record(arr)
     arr.first.class.where(id: arr.map(&:id))
   end
-  
+
   def user_params
     params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation)
   end
 
   def require_admin
-    redirect_to root_url unless current_user.admin?
+    redirect_to root_path unless current_user.admin?
   end
 end
