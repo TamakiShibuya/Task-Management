@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+
   def index
     @tasks = current_user.tasks
   end
@@ -24,22 +25,25 @@ class TasksController < ApplicationController
   end
 
   def update
-    task.update!(task_params)
-    redirect_to tasks_path, notice: "タスク「#{task.name}」を更新しました。"
+    if @task.update(task_params)
+      redirect_to tasks_path, notice: "タスク「#{@task.name}」を更新しました。"
+    else
+      render :edit, alert: "更新に失敗しました"
+    end
   end
 
   def destroy
-    task.destroy
-    redirect_to tasks_path, notice: "タスク「#{task.name}」を削除しました。"
+    @task.destroy
+    redirect_to tasks_path, notice: "タスク「#{@task.name}」を削除しました。"
   end
 
   private
 
-  def task_params
-    params.require(:task).permit(:name, :contents, :deadline, :priority, :status)
-  end
-
   def set_task
     @task = current_user.tasks.find(params[:id])
+  end
+
+  def task_params
+    params.require(:task).permit(:name, :contents, :deadline, :priority, :status)
   end
 end
