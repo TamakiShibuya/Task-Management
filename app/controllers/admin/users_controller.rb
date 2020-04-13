@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   def index
-    @users = User.eager_load(:tasks).where(id: params[:id])
+    @users = User.eager_load(:tasks)
   end
 
   def show
