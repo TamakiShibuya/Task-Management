@@ -19,6 +19,10 @@ table.table.table-hover
     tr
       th= Task.human_attribute_name(:deadline)
       td= @task.deadline
+        - if task.deadline_date - today > 0
+          td= diffDate(task.deadline_date)
+        - else
+          td 期限が過ぎています
     tr
       th= Task.human_attribute_name(:priority)
       td= @task.priority

@@ -1,7 +1,6 @@
 User.find_or_create_by!(email: 'sample@sample.com') do |user|
-  name: 'admin',
-  email: 'sample@sample.com',
-  admin: true,
-  password: 'password',
-  password_confirmation: 'password'
+  user.name = 'sample',
+  user.admin = true,
+  user.password = 'password',
+  user.password_confirmation = 'password'
 end
