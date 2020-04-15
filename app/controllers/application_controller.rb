@@ -3,17 +3,16 @@ class ApplicationController < ActionController::Base
   before_action :login_required
 
   class Forbidden < ActionController::ActionControllerError
-    end
+  end
   
-    rescue_from Forbidden,                      with: :rescue403
+  rescue_from Forbidden,                      with: :rescue403
+  rescue_from Exception,                      with: :rescue500
+  rescue_from ActiveRecord::RecordNotFound,   with: :rescue404
+  rescue_from ActionController::RoutingError, with: :rescue404
   
-    rescue_from InternalServer,                 with: :rescue500
-    rescue_from ActiveRecord::RecordNotFound,   with: :rescue404
-    rescue_from ActionController::RoutingError, with: :rescue404
-  
-    def routing_error
-      raise ActionController::RoutingError, params[:path]
-    end
+  def routing_error
+    raise ActionController::RoutingError, params[:path]
+  end
 
   private
 
