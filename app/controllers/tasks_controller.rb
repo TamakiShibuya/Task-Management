@@ -25,7 +25,7 @@ class TasksController < ApplicationController
   end
 
   def update
-    if @task.update!(task_params)
+    if @task.update(task_params)
       redirect_to tasks_path, notice: "タスク「#{@task.name}」を更新しました。"
     else
       render :edit, alert: "更新に失敗しました"

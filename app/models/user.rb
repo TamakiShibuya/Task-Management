@@ -10,7 +10,6 @@ class User < ApplicationRecord
 
   def least_admin_user
     if self.admin?
-      return unless self.admin?
       throw :abort if User.where(admin: true).count < 2
     end
   end
