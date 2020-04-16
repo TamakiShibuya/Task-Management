@@ -4,5 +4,3 @@ User.find_or_create_by!(email: 'sample@sample.com') do |user|
   user.password = 'password',
   user.password_confirmation = 'password'
 end
-
-['テック', 'プライベート'].each { |name| Label.create!(name: name) }

@@ -7,9 +7,6 @@
   .form-group
     = f.label :name
     = f.text_field :name, class: 'form-control', id: 'task_name'
-  .form_check
-     = f.label :label
-     = f.collection_check_boxes(:label_ids, Label.all, :id, :name)
   .form-group
     = f.label :contents
     = f.text_area :contents, rows: 5, class: 'form-control', id: 'task_contents'
