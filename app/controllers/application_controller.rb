@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   end
   
   rescue_from Forbidden,                      with: :rescue403
-  rescue_from Exception,                      with: :rescue500
+  rescue_from StandardError,                      with: :rescue500
   rescue_from ActiveRecord::RecordNotFound,   with: :rescue404
   rescue_from ActionController::RoutingError, with: :rescue404
   
