@@ -17,7 +17,8 @@ ja:
         created_at: 登録日
         deadline: 期限　
         priority: 優先度
-        status: ステータス　
+        status: ステータス
+        label: ラベル
       user:
         name: 名前
         email: メールアドレス
