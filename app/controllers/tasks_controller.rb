@@ -2,14 +2,17 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = current_user.tasks
+    @tasks = current_user.tasks.eager_load(:labels)
+    @tasks = @tasks.joins(:labels).where(labels: { id: params[:label_id] }) if params[:label_id].present?
   end
 
   def show
+    @label = Label.all
   end
 
   def new
     @task = Task.new
+    @label = Label.new
   end
 
   def create
@@ -17,6 +20,7 @@ class TasksController < ApplicationController
     if @task.save!
       redirect_to @task, notice: "タスク「#{@task.name}」を登録しました。"
     else
+      @label = Label.new
       render :new
     end
   end
@@ -44,6 +48,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :contents, :deadline, :priority, :status)
+    params.require(:task).permit(:name, :contents, :deadline, :priority, :status, { label_ids: [] })
   end
 end

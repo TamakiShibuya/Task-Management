@@ -9,6 +9,8 @@ class Task < ApplicationRecord
   validate :validate_name_not_including_comma
 
   belongs_to :user
+  has_many :labellings, dependent: :destroy
+  has_many :labels, through: :labellings
 
   private
   def not_before_today
