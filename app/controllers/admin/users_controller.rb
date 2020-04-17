@@ -42,12 +42,13 @@ class Admin::UsersController < ApplicationController
     if @user.destroy
       redirect_to admin_users_path, notice: "ユーザー「#{@user.name}」を削除しました"
     else
-      flash[:danger] = "管理者が1人しかいないため削除できません"
+      flash[:danger] = '管理者が1人しかいないため削除できません'
       redirect_to admin_users_path
     end
   end
 
   private
+
   def user_params
     params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation)
   end

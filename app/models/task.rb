@@ -13,6 +13,7 @@ class Task < ApplicationRecord
   has_many :labels, through: :labellings
 
   private
+
   def not_before_today
     errors.add(:deadline, '今日より前の日付は選べません') if deadline < Time.zone.today
   end
