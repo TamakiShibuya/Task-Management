@@ -6,6 +6,6 @@ module TasksHelper
   end
 
   def today
-    today = Date.today
+    today = Time.zone.today
   end
 end

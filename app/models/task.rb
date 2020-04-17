@@ -14,7 +14,7 @@ class Task < ApplicationRecord
 
   private
   def not_before_today
-    errors.add(:deadline, '今日より前の日付は選べません') if deadline < Date.today
+    errors.add(:deadline, '今日より前の日付は選べません') if deadline < Time.zone.today
   end
 
   def validate_name_not_including_comma

@@ -6,14 +6,10 @@ class ApplicationController < ActionController::Base
   end
   
   rescue_from Forbidden,                      with: :rescue403
-  rescue_from StandardError,                      with: :rescue500
+  rescue_from StandardError,                  with: :rescue500
   rescue_from ActiveRecord::RecordNotFound,   with: :rescue404
   rescue_from ActionController::RoutingError, with: :rescue404
   
-  def routing_error
-    raise ActionController::RoutingError, params[:path]
-  end
-
   private
 
   def current_user
@@ -25,14 +21,14 @@ class ApplicationController < ActionController::Base
   end
 
   def rescue403
-    render template: 'errors/forbidden', status: 403
+    render template: 'errors/forbidden', status: :forbidden
   end
 
   def rescue404
-    render template: 'errors/not_found', status: 404
+    render template: 'errors/not_found', status: :not_found
   end
 
   def rescue500
-    render template: 'errors/internal_sever_error', status: 500
+    render template: 'errors/internal_sever_error', status: :internal_server_error
   end
 end
